@@ -1,9 +1,11 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Pressable} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import React from 'react';
+import {Link} from 'expo-router';
 
 interface task {
-    description: string
+    description: string,
+    id: string
 }
 
 interface TaskListItemProps {
@@ -12,10 +14,12 @@ interface TaskListItemProps {
 
 export default function TaskListItem({task} : TaskListItemProps) {
   return(
-    <View style={styles.container}>
+ <Link href={`/${task.id}`} asChild>
+    <Pressable style={styles.container}>
         <Text style={styles.text}>{task.description}</Text>
         <AntDesign name="close" size={16} color="gray" />
-    </View>
+    </Pressable>
+ </Link>
  )
 
 }

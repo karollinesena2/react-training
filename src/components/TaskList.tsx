@@ -4,16 +4,22 @@ import { useState } from 'react';
 
 export default function TaskList(){
     const[tasks,setTasks] = useState([
-        {description: 'First Task' },
-        {description: 'Second Task'}
+        {id: '123', description: 'First Task' },
+        {id: '67', description: 'Second Task'}
     ]);
 
 const [newTask, setNewTask] = useState('')
+const [taskIdCounter, setTaskIdCounter] = useState(0);
 
     const createTask = () => {
         console.warn('Create: ', newTask);
-        setTasks([...tasks, {description: newTask}])
+        const newTaskObject = {
+            id: taskIdCounter.toString(),
+            description: newTask
+        };
+        setTasks([...tasks, newTaskObject]);
         setNewTask('');
+        setTaskIdCounter(taskIdCounter+1);
     }
 
 
