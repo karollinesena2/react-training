@@ -6,8 +6,8 @@ const Login = () => {
 
     const guestLogin = () => {
         logInWithAnonymous();
-
-    }
+    };
+   
 
     return <View style={{flex:1, alignItems: 'center', justifyContent:'center'}}>
      <Text onPress={guestLogin}>Login as guest</Text>
