@@ -11,7 +11,20 @@ export default function RootLayout() {
     <>
     <ThemeProvider value={DarkTheme}>
       <Realm>
-        <Stack screenOptions={{}}></Stack>
+      <Stack
+          screenOptions={{
+            headerRight: () => (
+              <View style={{ gap: 10, flexDirection: "row" }}>
+                <Link href="/login">
+                  <FontAwesome name="sign-in" size={24} color="lightgray" />
+                </Link>
+                <Link href="/profile">
+                  <FontAwesome5 name="house-user" size={24} color="lightgray" />
+                </Link>
+              </View>
+            ),
+          }}
+        />
       </Realm>
     </ThemeProvider>
       <StatusBar style="light" />

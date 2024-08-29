@@ -30,12 +30,20 @@ export default function TaskDetails() {
   return (
     <View style={{ padding: 10 }}>
       <Stack.Screen options={{ title: "Task Details" }} />
-    <TextInput
-      value={updatedDescription}
-      onChangeText={setUpdatedDescription}
-      onEndEditing={updateDescription}
-      style={{color:'white', fontSize: 20}}
-   />
+      <Text style={styles.text}>id: {task._id.toString()}</Text>
+      <Text style={styles.text}>
+        Create Date: {task.createdAt.toDateString()}
+      </Text>
+      <Text style={styles.text}>
+        Complete: {task.isComplete ? "Yes" : "No"}
+      </Text>
+      <Text style={styles.text}>User: {task.user_id}</Text>
+      <TextInput
+        value={updatedDescription}
+        onChangeText={setUpdatedDescription}
+        onEndEditing={updateDescription}
+        style={styles.input}
+      />
     </View>
   );
 }

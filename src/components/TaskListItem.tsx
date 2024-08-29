@@ -1,42 +1,39 @@
-import {View, Text, StyleSheet, Pressable} from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import React from 'react';
-import {Link} from 'expo-router';
+import { Pressable, Text, StyleSheet } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import { Link } from "expo-router";
+import { Task } from "../models/Task";
+import { useRealm } from "@realm/react";
 
-interface task {
-    description: string,
-    id: string
-}
+export default function TaskListItem({ task }: { task: Task }) {
+  const realm = useRealm();
 
-interface TaskListItemProps {
-    task: task;
-}
+  const deleteTask = () => {
+    realm.write(() => {
+      realm.delete(task);
+    });
+  };
 
-export default function TaskListItem({task} : TaskListItemProps) {
-  return(
- <Link href={`/${task.id}`} asChild>
-    <Pressable style={styles.container}>
+  return (
+    <Link href={`/${task._id}`} asChild>
+      <Pressable style={styles.container}>
         <Text style={styles.text}>{task.description}</Text>
-        <AntDesign name="close" size={16} color="gray" />
-    </Pressable>
- </Link>
- )
 
+        <AntDesign onPress={deleteTask} name="close" size={18} color="gray" />
+      </Pressable>
+    </Link>
+  );
 }
 
 const styles = StyleSheet.create({
-    container:{
-        backgroundColor: '#1D2125',
-        padding: 15,
-        borderRadius: 5,
-        flexDirection:'row',
-        justifyContent:'space-between',
-    },
-    text: {
-        color: 'white',
-        fontSize: 16,
-
-    }
-    
-
-})
+  container: {
+    backgroundColor: "#1D2125",
+    padding: 10,
+    borderRadius: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  text: {
+    color: "white",
+    fontSize: 16,
+  },
+});
